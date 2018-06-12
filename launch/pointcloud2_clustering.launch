@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<launch>
+    <node pkg="pointcloud2_clustering" type="pointcloud2_clustering" respawn="false" name="pointcloud2_clustering" output="screen">
+        <rosparam file="$(find pointcloud2_clustering)/config/param.yaml" command="load" />
+    </node>
+</launch>

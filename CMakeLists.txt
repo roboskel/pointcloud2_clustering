@@ -25,4 +25,5 @@ include_directories(
 )
 
 add_executable(pointcloud2_clustering src/clustering.cpp)
+add_dependencies(${PROJECT_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(pointcloud2_clustering ${catkin_LIBRARIES} ${PCL_LIBRARIES})

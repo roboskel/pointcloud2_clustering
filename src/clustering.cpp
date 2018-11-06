@@ -100,6 +100,8 @@ void cloud_callback (const pointcloud_msgs::PointCloud2_Segments& c_)
         msg_.factor = c_.factor;
         msg_.overlap = c_.overlap;
         msg_.first_stamp = c_.first_stamp;
+        msg_.header.stamp = ros::Time::now();
+        msg_.header.frame_id = c_.header.frame_id;
         msg_.num_scans = c_.num_scans ;
         msg_.angle_min = c_.angle_min ;
         msg_.angle_max = c_.angle_max ;

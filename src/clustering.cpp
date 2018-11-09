@@ -97,6 +97,8 @@ void cloud_callback (const pointcloud_msgs::PointCloud2_Segments& c_)
 
         msg_.clusters.push_back(msgout);
 
+        msg_.header.stamp = ros::Time::now();
+        msg_.header.frame_id = c_.header.frame_id;
         msg_.factor = c_.factor;
         msg_.overlap = c_.overlap;
         msg_.first_stamp = c_.first_stamp;

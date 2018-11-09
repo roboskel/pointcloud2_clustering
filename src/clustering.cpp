@@ -96,11 +96,19 @@ void cloud_callback (const pointcloud_msgs::PointCloud2_Segments& c_)
         pcl_conversions::fromPCL(cloud2, msgout);
 
         msg_.clusters.push_back(msgout);
+
+        msg_.header.stamp = ros::Time::now();
+        msg_.header.frame_id = c_.header.frame_id;
         msg_.factor = c_.factor;
         msg_.overlap = c_.overlap;
-        msg_.first_stamp = c_.first_stamp; 
+        msg_.first_stamp = c_.first_stamp;
         msg_.num_scans = c_.num_scans ;
-
+        msg_.angle_min = c_.angle_min ;
+        msg_.angle_max = c_.angle_max ;
+        msg_.angle_increment = c_.angle_increment;
+        msg_.range_min = c_.range_min;
+        msg_.range_max = c_.range_max;
+        msg_.scan_time = c_.scan_time;
 
     }
     pub.publish(msg_);

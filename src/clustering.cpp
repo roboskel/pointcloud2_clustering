@@ -109,6 +109,7 @@ void cloud_callback (const pointcloud_msgs::PointCloud2_Segments& c_)
         msg_.range_min = c_.range_min;
         msg_.range_max = c_.range_max;
         msg_.scan_time = c_.scan_time;
+        msg_.rec_time = c_.rec_time; 
 
     }
     pub.publish(msg_);
@@ -128,8 +129,8 @@ int main (int argc, char** argv){
 
     std::string topic;
     std::string out_topic;
-    n_.param("pointcloud2_clustering/cloud_topic", topic, std::string("laserscan_stacker/scans"));
-    n_.param("pointcloud2_clustering/output_cloud_topic", out_topic, std::string("pointcloud2_clustering/clusters"));
+    n_.param("pointcloud2_clustering/topic", topic, std::string("laserscan_stacker/scans"));
+    n_.param("pointcloud2_clustering/out_topic", out_topic, std::string("pointcloud2_clustering/clusters"));
 
     ros::Subscriber sub = n_.subscribe (topic, 1, cloud_callback);
 

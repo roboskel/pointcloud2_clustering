@@ -121,11 +121,11 @@ int main (int argc, char** argv){
     ros::NodeHandle n_;
 
 
-    n_.param("pointcloud2_clustering/setMaxIterations", maxIterations, 100);
-    n_.param("pointcloud2_clustering/setDistanceThreshold", distanceThreshold, 0.01);
-    n_.param("pointcloud2_clustering/setClusterTolerance", clusterTolerance, 0.4);
-    n_.param("pointcloud2_clustering/setMinClusterSize", minClusterSize, 10);
-    n_.param("pointcloud2_clustering/setMaxClusterSize", maxClusterSize, 25000);
+    n_.param("pointcloud2_clustering/maxIterations", maxIterations, 100);
+    n_.param("pointcloud2_clustering/distanceThreshold", distanceThreshold, 0.01);
+    n_.param("pointcloud2_clustering/clusterTolerance", clusterTolerance, 0.4);
+    n_.param("pointcloud2_clustering/minClusterSize", minClusterSize, 10);
+    n_.param("pointcloud2_clustering/maxClusterSize", maxClusterSize, 25000);
 
     std::string topic;
     std::string out_topic;

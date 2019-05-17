@@ -2,7 +2,8 @@ topic: "laserscan_stacker/scans"
 out_topic: "pointcloud2_clustering/clusters"
 
 maxIterations: 100 #default= 100
-distanceThreshold: 0.01 #default= 0.02 
-clusterTolerance: 0.4 #default= 0.02
-minClusterSize: 10 #default= 100
+distanceThreshold: 0.02 #default= 0.02 
+clusterTolerance: 0.3 #default= 0.02
+minClusterSize: 80 #default= 100
 maxClusterSize: 250000 #default= 25000
+percentOfpoints: 0.30 #which is the minimum percentage of the original points to keep

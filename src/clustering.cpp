@@ -41,19 +41,6 @@ void cloud_callback (const pointcloud_msgs::PointCloud2_Segments& c_)
 
     //std::cout << "PointCloud before filtering has: " << cloud->points.size () << " data points." << std::endl; //*
 
-    // Create the segmentation object for the planar model and set all the parameters
-    pcl::SACSegmentation<pcl::PointXYZ> seg;
-    pcl::PointIndices::Ptr inliers (new pcl::PointIndices);
-    pcl::ModelCoefficients::Ptr coefficients (new pcl::ModelCoefficients);
-    pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_plane (new pcl::PointCloud<pcl::PointXYZ> ());
-    seg.setOptimizeCoefficients (true);
-    seg.setModelType (pcl::SACMODEL_PLANE);
-    seg.setMethodType (pcl::SAC_RANSAC);
-    seg.setMaxIterations (maxIterations);
-    seg.setDistanceThreshold (distanceThreshold);
-    seg.setInputCloud (cloud);
-    seg.segment (*inliers, *coefficients);
-
 
     // Creating the KdTree object for the search method of the extraction
     pcl::search::KdTree<pcl::PointXYZ>::Ptr tree (new pcl::search::KdTree<pcl::PointXYZ>);
@@ -68,7 +55,6 @@ void cloud_callback (const pointcloud_msgs::PointCloud2_Segments& c_)
     ec.setInputCloud (cloud);
     ec.extract (cluster_indices);
 
-    int j = 0;
 
     pointcloud_msgs::PointCloud2_Segments msg_;
 
@@ -87,7 +73,6 @@ void cloud_callback (const pointcloud_msgs::PointCloud2_Segments& c_)
         cloud_cluster->is_dense = true;
 
         //std::cout << "PointCloud representing the Cluster: " << cloud_cluster->points.size () << " data points." << std::endl;
-        j++;
 
         sensor_msgs::PointCloud2 msgout;
         pcl::PCLPointCloud2 cloud2;

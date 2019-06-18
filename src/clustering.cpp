@@ -20,11 +20,8 @@
 #include <pcl/segmentation/extract_clusters.h>
 
 
-
-
 ros::Publisher pub;
 
-float x, y, z ;
 double clusterTolerance, distanceThreshold, percentOfpoints;
 
 int maxIterations;
@@ -36,14 +33,11 @@ void cloud_callback (const pointcloud_msgs::PointCloud2_Segments& c_)
 
     pcl::PCLPointCloud2 cloud2;
 
-
     pcl_conversions::toPCL( c_.clusters[0] , cloud2);
     pcl::PointCloud<pcl::PointXYZ>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZ> ());
     pcl::fromPCLPointCloud2(cloud2, *cloud);
 
-
-
-    // Create the filtering object: downsample the dataset using a leaf size of 1cm
+    //Create the filtering object: downsample the dataset using a leaf size of 1cm
     pcl::VoxelGrid<pcl::PointXYZ> vg;
     pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered (new pcl::PointCloud<pcl::PointXYZ>);
     vg.setInputCloud (cloud);
@@ -92,9 +86,6 @@ void cloud_callback (const pointcloud_msgs::PointCloud2_Segments& c_)
 
     *cloud=*cloud_filtered;
 
-
-
-
     // Creating the KdTree object for the search method of the extraction
     pcl::search::KdTree<pcl::PointXYZ>::Ptr tree (new pcl::search::KdTree<pcl::PointXYZ>);
     tree->setInputCloud (cloud);
@@ -109,8 +100,7 @@ void cloud_callback (const pointcloud_msgs::PointCloud2_Segments& c_)
     ec.extract (cluster_indices);
 
 
-    pointcloud_msgs::PointCloud2_Segments msg_;
-
+     pointcloud_msgs::PointCloud2_Segments msg_;
 
 
     for (std::vector<pcl::PointIndices>::const_iterator it = cluster_indices.begin (); it != cluster_indices.end (); ++it)
@@ -149,7 +139,9 @@ void cloud_callback (const pointcloud_msgs::PointCloud2_Segments& c_)
     msg_.range_min = c_.range_min;
     msg_.range_max = c_.range_max;
     msg_.scan_time = c_.scan_time;
-    msg_.rec_time = c_.rec_time; 
+    msg_.rec_time = c_.rec_time;
+    msg_.middle_z = c_.middle_z;
+    msg_.idForTracking = c_.idForTracking; 
 
 
     pub.publish(msg_);

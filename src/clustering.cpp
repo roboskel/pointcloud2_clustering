@@ -12,7 +12,7 @@
 #include <pcl/ModelCoefficients.h>
 #include <pcl/filters/voxel_grid.h>
 #include <pcl/features/normal_3d.h>
-#include <pointcloud_msgs/PointCloud2_Segments.h>
+#include <roboskel_msgs/PointCloud2_Segments.h>
 #include <pcl/filters/extract_indices.h>
 #include <pcl/sample_consensus/method_types.h>
 #include <pcl/sample_consensus/model_types.h>
@@ -28,7 +28,7 @@ int maxIterations;
 int minClusterSize, maxClusterSize;
 
 
-void cloud_callback (const pointcloud_msgs::PointCloud2_Segments& c_)
+void cloud_callback (const roboskel_msgs::PointCloud2_Segments& c_)
 {
 
     pcl::PCLPointCloud2 cloud2;
@@ -100,7 +100,7 @@ void cloud_callback (const pointcloud_msgs::PointCloud2_Segments& c_)
     ec.extract (cluster_indices);
 
 
-     pointcloud_msgs::PointCloud2_Segments msg_;
+     roboskel_msgs::PointCloud2_Segments msg_;
 
 
     for (std::vector<pcl::PointIndices>::const_iterator it = cluster_indices.begin (); it != cluster_indices.end (); ++it)
@@ -166,7 +166,7 @@ int main (int argc, char** argv){
 
     ros::Subscriber sub = n_.subscribe (topic, 1, cloud_callback);
 
-    pub = n_.advertise<pointcloud_msgs::PointCloud2_Segments> (out_topic, 1);
+    pub = n_.advertise<roboskel_msgs::PointCloud2_Segments> (out_topic, 1);
 
     ros::spin ();
 }

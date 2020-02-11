@@ -4,7 +4,7 @@ project(pointcloud2_clustering)
 add_compile_options(-std=c++11)
 
 find_package(catkin REQUIRED COMPONENTS
-  pointcloud_msgs
+  roboskel_msgs
   pcl_conversions
   sensor_msgs
   std_msgs
